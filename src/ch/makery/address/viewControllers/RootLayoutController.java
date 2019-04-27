@@ -52,7 +52,7 @@ public class RootLayoutController {
 
             // Define a pessoa dentro do controller.
             BirthdayStatisticsController controller = loader.getController();
-            controller.setPersonData(mainApp.getPersonData());
+            controller.setPersonDataToBirthdayStatistics(mainApp.getPersonData());
 
             dialogStage.show();
 

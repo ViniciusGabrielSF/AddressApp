@@ -33,7 +33,7 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Statistics">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#handleShowBirthdayStatistics" text="Show Statistics" />
+              <MenuItem mnemonicParsing="false" onAction="#handleShowBirthdayStatistics" text="Birthday Statistics" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" onAction="#handleAbout" text="Help">
