@@ -48,7 +48,7 @@ public class BirthdayStatisticsController {
      * 
      * @param persons
      */
-    public void setPersonData(List<Person> persons) {
+    public void setPersonDataToBirthdayStatistics(List<Person> persons) {
         // Conta o número de pessoas tendo seus aniversários em um mês específico.
         int[] monthCounter = new int[12];
         for (Person p : persons) {
