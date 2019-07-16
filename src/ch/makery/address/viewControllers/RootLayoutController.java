@@ -23,17 +23,6 @@ import javafx.stage.Stage;
  */
 public class RootLayoutController {
 
-    // Reference to the main application
-    private MainApp mainApp;
-
-    /**
-     * Is called by the main application to give a reference back to itself.
-     * 
-     * @param mainApp
-     */
-    public void setMainApp(MainApp mainApp) {
-        this.mainApp = mainApp;
-    }
     /**
      * Abre uma janela para mostrar as estatísticas de aniversário.
      */
@@ -46,13 +35,13 @@ public class RootLayoutController {
             Stage dialogStage = new Stage();
             dialogStage.setTitle("Birthday Statistics");
             dialogStage.initModality(Modality.WINDOW_MODAL);
-            dialogStage.initOwner(mainApp.getPrimaryStage());
+            dialogStage.initOwner(MainApp.getInstance().getPrimaryStage());
             Scene scene = new Scene(page);
             dialogStage.setScene(scene);
 
             // Define a pessoa dentro do controller.
             BirthdayStatisticsController controller = loader.getController();
-            controller.setPersonDataToBirthdayStatistics(mainApp.getPersonData());
+            controller.setPersonDataToBirthdayStatistics(MainApp.getInstance().getPersonData());
 
             dialogStage.show();
 
@@ -65,8 +54,8 @@ public class RootLayoutController {
      */
     @FXML
     private void handleNew() {
-        mainApp.getPersonData().clear();
-        mainApp.getPersonDataFile().getPersonFilePath().setPersonFilePath(null);
+        MainApp.getInstance().getPersonData().clear();
+        MainApp.getInstance().getPersonDataFile().getPersonFilePath().setPersonFilePath(null);
     }
 
     /**
@@ -82,10 +71,10 @@ public class RootLayoutController {
         fileChooser.getExtensionFilters().add(extFilter);
 
         // Show open file dialog
-        File file = fileChooser.showOpenDialog(mainApp.getPrimaryStage());
+        File file = fileChooser.showOpenDialog(MainApp.getInstance().getPrimaryStage());
 
         if (file != null) {
-            mainApp.getPersonDataFile().loadPersonDataFromFile(file);
+            MainApp.getInstance().getPersonDataFile().loadPersonDataFromFile(file);
         }
     }
 
@@ -95,9 +84,9 @@ public class RootLayoutController {
      */
     @FXML
     private void handleSave() {
-        File personFile =  mainApp.getPersonDataFile().getPersonFilePath().getPersonFilePath();
+        File personFile =  MainApp.getInstance().getPersonDataFile().getPersonFilePath().getPersonFilePath();
         if (personFile != null) {
-            mainApp.getPersonDataFile().savePersonDataToFile(personFile);
+            MainApp.getInstance().getPersonDataFile().savePersonDataToFile(personFile);
         } else {
             handleSaveAs();
         }
@@ -116,14 +105,14 @@ public class RootLayoutController {
         fileChooser.getExtensionFilters().add(extFilter);
 
         // Show save file dialog
-        File file = fileChooser.showSaveDialog(mainApp.getPrimaryStage());
+        File file = fileChooser.showSaveDialog(MainApp.getInstance().getPrimaryStage());
 
         if (file != null) {
             // Make sure it has the correct extension
             if (!file.getPath().endsWith(".xml")) {
                 file = new File(file.getPath() + ".xml");
             }
-            mainApp.getPersonDataFile().savePersonDataToFile(file);
+            MainApp.getInstance().getPersonDataFile().savePersonDataToFile(file);
         }
     }
 

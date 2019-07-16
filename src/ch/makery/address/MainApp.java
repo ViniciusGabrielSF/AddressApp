@@ -7,21 +7,28 @@ import ch.makery.address.util.file.PersonDataFile;
 import java.io.File;
 import java.io.IOException;
 
-import javafx.application.Application;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-public class MainApp extends Application {
+public class MainApp {
 
-    private Stage primaryStage;
+    Stage primaryStage;
     private BorderPane rootLayout;
     private PersonDataFile personDataFile;
+    private static MainApp instance = null; 
+    
+    public static MainApp getInstance(){
+        if(MainApp.instance == null){
+            MainApp.instance = new MainApp();
+        }
+       return MainApp.instance;
+    }
     
        /**
      * Os dados como uma observable list de Persons.
@@ -31,7 +38,7 @@ public class MainApp extends Application {
     /**
      * Construtor
      */
-    public MainApp() {
+    private MainApp() {
         // Add some sample data
         personData.add(new Person("Hans", "Muster"));
         personData.add(new Person("Ruth", "Mueller"));
@@ -52,18 +59,7 @@ public class MainApp extends Application {
         return personData;
     }
 
-    @Override
-    public void start(Stage primaryStage) {
-        this.primaryStage = primaryStage;
-        this.primaryStage.setTitle("AddressApp");
-        this.primaryStage.getIcons().add(new Image("file:resources/images/agenda.png"));
-        
-        initRootLayout();
-
-        showPersonOverview();
-    }
-    
-    /**
+    /*
      * Inicializa o root layout e tenta carregar o último arquivo
      * de pessoa aberto.
      */
@@ -81,7 +77,7 @@ public class MainApp extends Application {
 
             // Dá ao controller o acesso ao main app.
             RootLayoutController controller = loader.getController();
-            controller.setMainApp(this);
+
 
             primaryStage.show();
         } catch (IOException e) {
@@ -90,8 +86,6 @@ public class MainApp extends Application {
 
         // Tenta carregar o último arquivo de pessoa aberto.
         personDataFile = new PersonDataFile();
-        personDataFile.getPersonFilePath().setMainApp(this);
-        personDataFile.setMainApp(this);
         File file = personDataFile.getPersonFilePath().getPersonFilePath();
         if (file != null) {
             personDataFile.loadPersonDataFromFile(file);
@@ -113,7 +107,7 @@ public void showPersonOverview() {
 
         // Dá ao controlador acesso à the main app.
         PersonOverviewController controller = loader.getController();
-        controller.setMainApp(this);
+        controller.setItemsOnTable();
 
     } catch (IOException e) {
         e.printStackTrace();
@@ -131,10 +125,4 @@ public void showPersonOverview() {
     public Stage getPrimaryStage() {
         return primaryStage;
     }
-
-    public static void main(String[] args) {
-        launch(args);
-    }
-
-
 }

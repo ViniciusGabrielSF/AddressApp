@@ -18,16 +18,12 @@ import javax.xml.bind.Unmarshaller;
  * @author Vinicius
  */
 public class PersonDataFile {
-    private MainApp mainApp;
     private PersonFilePath personFilePath;
     
     public PersonDataFile(){
         personFilePath = new PersonFilePath();
     }
     
-    public void setMainApp(MainApp mainApp) {
-        this.mainApp = mainApp;
-    }
     
     public PersonFilePath getPersonFilePath(){
         return personFilePath;
@@ -47,8 +43,8 @@ public class PersonDataFile {
 
             // Reading XML from the file and unmarshalling.
             PersonListWrapper wrapper = (PersonListWrapper) um.unmarshal(file);
-            mainApp.getPersonData().clear();
-            mainApp.getPersonData().addAll(wrapper.getPersons());
+            MainApp.getInstance().getPersonData().clear();
+            MainApp.getInstance().getPersonData().addAll(wrapper.getPersons());
 
             // Save the file path to the registry.
             personFilePath.setPersonFilePath(file);
@@ -77,7 +73,7 @@ public class PersonDataFile {
 
             // Envolvendo nossos dados da pessoa.
             PersonListWrapper wrapper = new PersonListWrapper();
-            wrapper.setPersons(mainApp.getPersonData());
+            wrapper.setPersons(MainApp.getInstance().getPersonData());
 
             // Enpacotando e salvando XML  no arquivo.
             m.marshal(wrapper, file);

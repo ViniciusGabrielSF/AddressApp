@@ -14,13 +14,7 @@ import java.util.prefs.Preferences;
  * @author Vinicius
  */
 public class PersonFilePath {
-    private MainApp mainApp;
-    
-    
-    
-    public void setMainApp(MainApp mainApp) {
-        this.mainApp = mainApp;
-    }
+
     
     
    /**
@@ -52,12 +46,12 @@ public class PersonFilePath {
            prefs.put("filePath", file.getPath());
 
            // Update the stage title.
-           mainApp.getPrimaryStage().setTitle("AddressApp - " + file.getName());
+           MainApp.getInstance().getPrimaryStage().setTitle("AddressApp - " + file.getName());
        } else {
            prefs.remove("filePath");
 
            // Update the stage title.
-           mainApp.getPrimaryStage().setTitle("AddressApp");
+           MainApp.getInstance().getPrimaryStage().setTitle("AddressApp");
        }
    }
 }

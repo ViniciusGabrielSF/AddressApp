@@ -37,8 +37,7 @@ public class PersonOverviewController {
     @FXML
     private Label birthdayLabel;
 
-    // Reference to the main application.
-    private MainApp mainApp;
+
 
     /**
      * O construtor.
@@ -67,16 +66,11 @@ private void initialize() {
             (observable, oldValue, newValue) -> showPersonDetails(newValue));
 }
 
-    /**
-     * É chamado pela aplicação principal para dar uma referência de volta a si mesmo.
-     * 
-     * @param mainApp
-     */
-    public void setMainApp(MainApp mainApp) {
-        this.mainApp = mainApp;
+
+    public void setItemsOnTable(){
 
         // Adiciona os dados da observable list na tabela
-        personTable.setItems(mainApp.getPersonData());
+        personTable.setItems(MainApp.getInstance().getPersonData());
     }
     
     /**
@@ -124,7 +118,7 @@ private void initialize() {
            Stage dialogStage = new Stage();
            dialogStage.setTitle("Edit Person");
            dialogStage.initModality(Modality.WINDOW_MODAL);
-           dialogStage.initOwner(mainApp.getPrimaryStage());
+           dialogStage.initOwner(MainApp.getInstance().getPrimaryStage());
            Scene scene = new Scene(page);
            dialogStage.setScene(scene);
 
@@ -170,7 +164,7 @@ private void initialize() {
        Person tempPerson = new Person();
        boolean okClicked = showPersonEditDialog(tempPerson);
        if (okClicked) {
-           mainApp.getPersonData().add(tempPerson);
+           MainApp.getInstance().getPersonData().add(tempPerson);
        }
     }
 
