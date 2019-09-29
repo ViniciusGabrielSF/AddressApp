@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ch.makery.address.util.file;
+package ch.makery.address.util;
 
 import ch.makery.address.MainApp;
 import java.io.File;
@@ -14,6 +14,9 @@ import java.util.prefs.Preferences;
  * @author Vinicius
  */
 public class PersonFilePath {
+
+    public PersonFilePath() {
+    }
 
     
     

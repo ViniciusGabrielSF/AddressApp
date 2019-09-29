@@ -3,9 +3,10 @@ package ch.makery.address;
 import ch.makery.address.model.Person;
 import ch.makery.address.viewControllers.PersonOverviewController;
 import ch.makery.address.viewControllers.RootLayoutController;
-import ch.makery.address.util.file.PersonDataFile;
+import ch.makery.address.util.PersonDataFile;
 import java.io.File;
 import java.io.IOException;
+
 
 
 import javafx.collections.FXCollections;
@@ -15,6 +16,8 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+
+import ch.makery.address.jdbc.AcessDB;
 
 public class MainApp {
 
@@ -39,16 +42,7 @@ public class MainApp {
      * Construtor
      */
     private MainApp() {
-        // Add some sample data
-        personData.add(new Person("Hans", "Muster"));
-        personData.add(new Person("Ruth", "Mueller"));
-        personData.add(new Person("Heinz", "Kurz"));
-        personData.add(new Person("Cornelia", "Meier"));
-        personData.add(new Person("Werner", "Meyer"));
-        personData.add(new Person("Lydia", "Kunz"));
-        personData.add(new Person("Anna", "Best"));
-        personData.add(new Person("Stefan", "Meier"));
-        personData.add(new Person("Martin", "Mueller"));
+        personDataFile = new PersonDataFile();
     }
     
     /**
@@ -85,13 +79,9 @@ public class MainApp {
         }
 
         // Tenta carregar o último arquivo de pessoa aberto.
-        personDataFile = new PersonDataFile();
-        File file = personDataFile.getPersonFilePath().getPersonFilePath();
-        if (file != null) {
-            personDataFile.loadPersonDataFromFile(file);
-        }
+        AcessDB acess = new AcessDB();
+        acess.loadPersonDataFromDB();
     }
-
     /**
      * Mostra o person overview dentro do root layout.
      */

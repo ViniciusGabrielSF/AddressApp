@@ -7,7 +7,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.FileChooser;
 import ch.makery.address.MainApp;
+import ch.makery.address.jdbc.AcessDB;
+import ch.makery.address.model.Person;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -84,11 +88,18 @@ public class RootLayoutController {
      */
     @FXML
     private void handleSave() {
-        File personFile =  MainApp.getInstance().getPersonDataFile().getPersonFilePath().getPersonFilePath();
-        if (personFile != null) {
-            MainApp.getInstance().getPersonDataFile().savePersonDataToFile(personFile);
-        } else {
-            handleSaveAs();
+            try{
+                AcessDB acess = new AcessDB();
+                List<Person> persons = new ArrayList<Person>();
+                persons.addAll( (ArrayList) MainApp.getInstance().getPersonData());
+                acess.savePersonDataToDB(persons);
+            } catch( Exception e){
+            File personFile =  MainApp.getInstance().getPersonDataFile().getPersonFilePath().getPersonFilePath();
+            if (personFile != null) {
+                MainApp.getInstance().getPersonDataFile().savePersonDataToFile(personFile);
+            } else {
+                handleSaveAs();
+            }
         }
     }
 
@@ -97,23 +108,32 @@ public class RootLayoutController {
      */
     @FXML
     private void handleSaveAs() {
-        FileChooser fileChooser = new FileChooser();
+        try{
+            AcessDB acess = new AcessDB();
+            List<Person> persons = new ArrayList<Person>();
+            persons.addAll( (ArrayList) MainApp.getInstance().getPersonData());
+            acess.savePersonDataToDB(persons);
+        } catch( Exception e){
 
-        // Set extension filter
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
-                "XML files (*.xml)", "*.xml");
-        fileChooser.getExtensionFilters().add(extFilter);
+            FileChooser fileChooser = new FileChooser();
 
-        // Show save file dialog
-        File file = fileChooser.showSaveDialog(MainApp.getInstance().getPrimaryStage());
+            // Set extension filter
+            FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
+                    "XML files (*.xml)", "*.xml");
+            fileChooser.getExtensionFilters().add(extFilter);
 
-        if (file != null) {
-            // Make sure it has the correct extension
-            if (!file.getPath().endsWith(".xml")) {
-                file = new File(file.getPath() + ".xml");
-            }
-            MainApp.getInstance().getPersonDataFile().savePersonDataToFile(file);
-        }
+            // Show save file dialog
+            File file = fileChooser.showSaveDialog(MainApp.getInstance().getPrimaryStage());
+
+            if (file != null) {
+                // Make sure it has the correct extension
+                if (!file.getPath().endsWith(".xml")) {
+                    file = new File(file.getPath() + ".xml");
+                }
+                MainApp.getInstance().getPersonDataFile().savePersonDataToFile(file);
+
+            }        
+                }
     }
 
     /**

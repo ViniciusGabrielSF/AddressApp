@@ -2,6 +2,7 @@ package ch.makery.address.model;
 
 import ch.makery.address.util.LocalDateAdapter;
 import java.time.LocalDate;
+import java.util.Date;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
@@ -48,7 +49,22 @@ public class Person {
         this.city = new SimpleStringProperty("some city");
         int mes =(int) (Math.random() * (12 - 1) + 1); // só pelo grafico
         this.birthday = new SimpleObjectProperty<LocalDate>(LocalDate.of(1999,mes, 21));
+  
     }
+
+    public Person(String firstName, String lastName, String street, Integer postalCode, String city, LocalDate birthday) {
+        this.firstName = new SimpleStringProperty(firstName);
+        this.lastName = new SimpleStringProperty(lastName);
+        this.street = new SimpleStringProperty(street);
+        this.postalCode = new SimpleIntegerProperty(postalCode);
+        this.city = new SimpleStringProperty(city);
+        this.birthday = new SimpleObjectProperty<LocalDate>(birthday);
+    }
+
+
+
+ 
+    
     
     public String getFirstName() {
         return firstName.get();

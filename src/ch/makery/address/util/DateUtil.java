@@ -1,8 +1,11 @@
 package ch.makery.address.util;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.temporal.TemporalAccessor;
+import java.util.Date;
 
 /**
  * Funções auxiliares para lidar com datas.
@@ -31,7 +34,7 @@ public class DateUtil {
         }
         return DATE_FORMATTER.format(date);
     }
-
+    
     /**
      * Converte um String no formato definido {@link DateUtil#DATE_PATTERN} 
      * para um objeto {@link LocalDate}.
@@ -59,4 +62,24 @@ public class DateUtil {
         // Tenta converter o String.
         return DateUtil.parse(dateString) != null;
     }
+    
+    public static LocalDate toLocalDateFromDate(Date dateToConvert) {
+        return dateToConvert.toInstant()
+          .atZone(ZoneId.systemDefault())
+          .toLocalDate();
+    }
+    
+    public static LocalDate toLocalDateFromSqlDate(Date dateToConvert) {
+        return new java.sql.Date(dateToConvert.getTime()).toLocalDate();
+    }
+    
+    public static Date toDateViaSqlDate(LocalDate dateToConvert) {
+        return java.sql.Date.valueOf(dateToConvert);
+    }
+    public static Date toDateFromLocalDate(LocalDate dateToConvert) {
+        return java.util.Date.from(dateToConvert.atStartOfDay()
+          .atZone(ZoneId.systemDefault())
+          .toInstant());
+    }
+    
 }
