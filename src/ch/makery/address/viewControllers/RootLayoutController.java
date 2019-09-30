@@ -91,7 +91,7 @@ public class RootLayoutController {
             try{
                 AcessDB acess = new AcessDB();
                 List<Person> persons = new ArrayList<Person>();
-                persons.addAll( (ArrayList) MainApp.getInstance().getPersonData());
+                persons.addAll( MainApp.getInstance().getPersonsAsArrayList() );
                 acess.savePersonDataToDB(persons);
             } catch( Exception e){
             File personFile =  MainApp.getInstance().getPersonDataFile().getPersonFilePath().getPersonFilePath();
@@ -99,7 +99,7 @@ public class RootLayoutController {
                 MainApp.getInstance().getPersonDataFile().savePersonDataToFile(personFile);
             } else {
                 handleSaveAs();
-            }
+            } 
         }
     }
 
@@ -111,10 +111,9 @@ public class RootLayoutController {
         try{
             AcessDB acess = new AcessDB();
             List<Person> persons = new ArrayList<Person>();
-            persons.addAll( (ArrayList) MainApp.getInstance().getPersonData());
+            persons.addAll(  MainApp.getInstance().getPersonsAsArrayList());
             acess.savePersonDataToDB(persons);
         } catch( Exception e){
-
             FileChooser fileChooser = new FileChooser();
 
             // Set extension filter
@@ -132,8 +131,8 @@ public class RootLayoutController {
                 }
                 MainApp.getInstance().getPersonDataFile().savePersonDataToFile(file);
 
-            }        
-                }
+            }   
+        }
     }
 
     /**

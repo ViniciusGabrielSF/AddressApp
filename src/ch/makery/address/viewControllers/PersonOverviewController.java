@@ -8,6 +8,7 @@ import ch.makery.address.MainApp;
 import ch.makery.address.model.Person;
 import ch.makery.address.util.DateUtil;
 import java.io.IOException;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -70,7 +71,8 @@ private void initialize() {
     public void setItemsOnTable(){
 
         // Adiciona os dados da observable list na tabela
-        personTable.setItems(MainApp.getInstance().getPersonData());
+        
+        personTable.setItems( MainApp.getInstance().getPersonData());
     }
     
     /**

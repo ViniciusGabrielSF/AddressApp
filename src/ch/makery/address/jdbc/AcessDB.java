@@ -7,10 +7,9 @@ package ch.makery.address.jdbc;
 
 import ch.makery.address.MainApp;
 import ch.makery.address.model.Person;
-import ch.makery.address.model.PersonListWrapper;
+
 import ch.makery.address.util.DateUtil;
-import ch.makery.address.util.PersonDataFile;
-import java.io.File;
+
 import java.sql.Connection;
 
 import java.sql.DriverManager;
@@ -23,9 +22,7 @@ import java.util.ArrayList;
 // import java.util.Date;
 import java.sql.Date;
 import java.util.List;
-import javafx.scene.control.Alert;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Marshaller;
+
 
 
 
@@ -70,7 +67,7 @@ public class AcessDB {
     }
 
 
-    public void loadPersonDataFromDB() {
+    public void loadPersonDataFromDB() throws Exception {
         try {
             Connection connection = acess();
             PreparedStatement select = connection.prepareStatement("SELECT * FROM PESSOA");
@@ -97,13 +94,7 @@ public class AcessDB {
             MainApp.getInstance().getPersonData().addAll(persons);
             connection.close();
         } catch (SQLException | NullPointerException ex ) {
-            
-            PersonDataFile personDataFile = MainApp.getInstance().getPersonDataFile();
-            File file = personDataFile.getPersonFilePath().getPersonFilePath();
-            if (file != null) {
-                personDataFile.loadPersonDataFromFile(file);
-                return;
-            }
+            throw new Exception();
         }
 
     }
@@ -111,11 +102,13 @@ public class AcessDB {
     public void savePersonDataToDB(List<Person> persons) throws Exception {
         try {
             Connection connection = acess();
+
             PreparedStatement delete = connection.prepareStatement("DELETE FROM PESSOA");
-            ResultSet result = delete.executeQuery();
-            PreparedStatement insert = connection
-                    .prepareStatement("INSERT INTO pessoa (firstname,lastname,street,city,postalCode,birthday) VALUES (?,?,?,?,?,?);");
-            int i = 0;
+
+            delete.executeUpdate();
+
+            PreparedStatement insert = 
+            connection.prepareStatement("INSERT INTO pessoa (firstname,lastname,street,city,postalCode,birthday) VALUES (?,?,?,?,?,?);");
             
             for (Person person : persons) {
                 insert.setString(1, person.getFirstName());
@@ -125,12 +118,11 @@ public class AcessDB {
                 insert.setInt(5, person.getPostalCode());
                 Date sqlDate = (Date) DateUtil.toDateViaSqlDate(person.getBirthday());
                 insert.setDate(6, sqlDate);
-                insert.executeQuery();
+                insert.executeUpdate();
                 
             } 
             connection.close();
         }catch ( SQLException | NullPointerException ex) {
-            System.out.println("ME MAMA LEKEEEEEEE");
             throw new Exception();
         }
     }

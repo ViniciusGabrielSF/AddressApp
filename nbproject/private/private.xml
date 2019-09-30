@@ -3,18 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/Vinícius/AddressApp_ViniciusGabrielSilvaFerreira/src/ch/makery/address/viewControllers/RootLayoutController.java</file>
-            <file>file:/E:/Vinícius/AddressApp_ViniciusGabrielSilvaFerreira/src/ch/makery/address/util/PersonDataFile.java</file>
-            <file>file:/E:/Vinícius/AddressApp_ViniciusGabrielSilvaFerreira/src/ch/makery/address/Aplicação.java</file>
-            <file>file:/E:/Vinícius/AddressApp_ViniciusGabrielSilvaFerreira/src/ch/makery/address/MainApp.java</file>
             <file>file:/E:/Vinícius/AddressApp_ViniciusGabrielSilvaFerreira/src/ch/makery/address/model/Person.java</file>
             <file>file:/E:/Vinícius/AddressApp_ViniciusGabrielSilvaFerreira/src/ch/makery/address/jdbc/AcessDB.java</file>
             <file>file:/E:/Vinícius/AddressApp_ViniciusGabrielSilvaFerreira/src/ch/makery/address/util/DateUtil.java</file>
+            <file>file:/E:/Vinícius/AddressApp_ViniciusGabrielSilvaFerreira/src/ch/makery/address/viewControllers/RootLayoutController.java</file>
+            <file>file:/E:/Vinícius/AddressApp_ViniciusGabrielSilvaFerreira/src/ch/makery/address/util/PersonDataFile.java</file>
+            <file>file:/E:/Vinícius/AddressApp_ViniciusGabrielSilvaFerreira/src/ch/makery/address/Aplicação.java</file>
             <file>file:/E:/Vinícius/AddressApp_ViniciusGabrielSilvaFerreira/src/ch/makery/address/model/PersonListWrapper.java</file>
             <file>file:/E:/Vinícius/AddressApp_ViniciusGabrielSilvaFerreira/src/ch/makery/address/util/LocalDateAdapter.java</file>
             <file>file:/E:/Vinícius/AddressApp_ViniciusGabrielSilvaFerreira/src/ch/makery/address/viewControllers/PersonOverviewController.java</file>
-            <file>file:/E:/Vinícius/AddressApp_ViniciusGabrielSilvaFerreira/src/ch/makery/address/view/RootLayout.fxml</file>
             <file>file:/E:/Vinícius/AddressApp_ViniciusGabrielSilvaFerreira/nbproject/build-impl.xml</file>
+            <file>file:/E:/Vinícius/AddressApp_ViniciusGabrielSilvaFerreira/src/ch/makery/address/MainApp.java</file>
             <file>file:/E:/Vinícius/AddressApp_ViniciusGabrielSilvaFerreira/src/ch/makery/address/util/PersonFilePath.java</file>
         </group>
     </open-files>

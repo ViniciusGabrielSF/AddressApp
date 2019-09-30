@@ -18,6 +18,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import ch.makery.address.jdbc.AcessDB;
+import java.util.ArrayList;
 
 public class MainApp {
 
@@ -37,6 +38,7 @@ public class MainApp {
      * Os dados como uma observable list de Persons.
      */
     private ObservableList<Person> personData = FXCollections.observableArrayList();
+    
 
     /**
      * Construtor
@@ -52,7 +54,15 @@ public class MainApp {
     public ObservableList<Person> getPersonData() {
         return personData;
     }
-
+    
+    public ArrayList<Person> getPersonsAsArrayList(){
+        ArrayList<Person> persons = new ArrayList<Person>();
+        
+        for( Person person : personData){
+            persons.add(person);
+        }
+        return persons;
+    }
     /*
      * Inicializa o root layout e tenta carregar o último arquivo
      * de pessoa aberto.
@@ -79,8 +89,18 @@ public class MainApp {
         }
 
         // Tenta carregar o último arquivo de pessoa aberto.
+        try{
         AcessDB acess = new AcessDB();
         acess.loadPersonDataFromDB();
+        } catch(Exception e ){
+            
+            PersonDataFile personDataFile = getPersonDataFile();
+            File file = personDataFile.getPersonFilePath().getPersonFilePath();
+            if (file != null) {
+                personDataFile.loadPersonDataFromFile(file);
+            }
+        }
+        
     }
     /**
      * Mostra o person overview dentro do root layout.
